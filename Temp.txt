@@ -1,0 +1,249 @@
+
+<!DOCTYPE suite System ="">
+<suite name="TestSuite" thread-count="3" parallel="tests">
+<test name="ChromeTest">
+<parallel name ="browser" value="Chrome"/>
+<classes>
+<class name="org.selenium.a">
+</class>
+</classes>
+</test>
+<test name="FirefoxTest">
+<parallel name ="browser" value="Firefox"/>
+<classes>
+<class name="org.selenium.a">
+</class>
+</classes>
+</test>
+</suite>
+
+
+package a;
+
+import b;
+
+public class a
+{
+@BeforeTest
+@Parameter("browser")
+public void BrowserTest(String browser) throws Exception
+{
+ if (browser.equalsIgnoreCase("Chrome"))
+{
+
+ System.setProperty("webdriver.chrome.driver","C:\\a\\chromedriver.exe");
+ Webdriver driver=new chromeDriver();
+ 
+}
+
+else if (browser.equalsIgnoreCase("Firefox"))
+{
+  System.setProperty("webdriver.gecko.driver","C:\\a\\firefoxdriver.exe");
+ Webdriver driver=new fireFoxDriver();
+ 
+}
+ 
+else
+{
+  throw new Exception("incorrect driver");
+} 
+
+driver.manage().timeOut().implicitlyWait(10,TimeUnit.SECONDS);
+}
+}
+
+
+@Test
+public void test() throws InterruptedException 
+{
+driver.get("");
+driver.findElement(By).click();
+Thread.sleep(2000);
+}
+
+
+--------
+TakesScreenshot ts= (TakesScreenshot)driver;
+File f = ts.getSCreenshotAs(OutPutType.FILE);
+FileUtils.copyFile(f,new File("./Screens/Screenshot.png"));
+----
+src/main/java
+src/test/java
+--
+Java Project 
+
+scr folder 
+Package = Java Class File 
+test folder 
+
+src folder 
+
+==
+
+
+
+
+public class TC001_GET_Request
+{
+@Test
+public void m1()
+{
+RestAssured.baseURI("https://www.google.com/weather/city");
+RequestSpecification req= RestAssured.given();
+Response rs= req.request(Method.GET,"/hyderabad");
+String resp=rs.getBody().asString();
+syso(""+resp);
+int statuscode=rs.getStatusCode();
+Assert.assertEquals(statuscode,200);
+String statusline=rs.getStatusLine();
+Assert.assertEquals(statusline,"HTTP/1.1 200 OK")
+}
+}
+----
+RestAssured.baseURI("https://www.google.com/weather/city");
+RequestSpecification req=RestAssured.given();
+Response res=req.request(Method.get(),"/hyderabad");
+String response=res.getBody().asString();
+Syso(response);
+int responsecode=res.getStatusCode();
+Assert.assertEquals(responsecode,200);
+String statusline=res.getStatusLine();
+Assert.assertEquals(responseline,"HTTP/1.1 200 OK");
+----
+RestAssured.baseURI("http://www.google.com/weather/city");
+RequestSpecification req=RestAssured.given();
+
+JSONObject jo = new JSONObject();
+jo.put("Fname","AD");
+req.body(jo.toJSONString());
+req.header("Content-Type","application/json");
+Response res=req.request(Method.POST,"/register");
+
+String resp=res.getbody().asString();
+Syso(resp);
+
+int statusCode=response.getstatusCode();
+response.JsonPath().get("SuccessCode");
+
+---
+
+RestAssured.getURI("https://www.google.com/city/weather");
+REquestSpecification req= RestAssured.given();
+Response res=req.request(Method.GET,"/hyderabad");
+Sring response=res.getBody().asString();
+Header ah= response.headers();
+for (Header header:ah)
+{
+ syso(header.getName()+""+header.getValue());
+}
+
+Assert.assertEquals(response.contains("Delhi"),true)
+
+}
+
+-----
+JsonPath js= res.jsonPath();
+syso(js.get("City"));
+--------
+
+"Username":"Hyderabad",
+"password":"Test",
+"city:weather":"Hyderabad:Cool"
+----
+
+RestAssured.baseURI("");
+RequestSpecification req=RestAssured.given();
+PreemptiveBasiAuthScheme authscheme= PreemptiveBasiAuthScheme();
+authscheme.getUserName("");
+authscheme.getPassword("");
+RestAssure.authentication=authscheme
+Response res=req.request(Method.Get,"/hyderabad");
+JsonPath jsonpath=res.jsonPath();
+Syso(jasonpath.get("City"));
+Syso(jasonpath.get("Temparature"));
+
+
+{
+  "city:temparature":"hyderabad:36"
+}
+
+ = 
+
+BaseURI 
+Req object
+Res Object
+Response Body 
+Status Code , Line , Completion Time 
+Header(Content Type)
+---
+RestAssured.baseURI("https://www.google.com/weather/city");
+RequestSpecification req= new RequestSpecification();
+
+JSONObject jo=new JSONObject();
+jo.put("Fname","AD"); 
+jo.put("Lname","BG");
+
+jo.body(jo.toJSONString());
+jo.header("Content-Type","application/json");
+
+
+Response res=req.request(Method.POST,"/hydeabad");
+String responseb =res.getBody().AsString;
+Assert.assertEquals(responseb.contains("AD"),true);
+---
+console print: String 
+Req n Res : JSON
+Data Creation: JsonObject and store and then to JSONString
+
+
+public void getempdata()
+{
+return 
+String emp[][]={{"A","100","2"},{"A","100","2"},{"A","100","2"}};
+}
+
+
+
+Wait w =new FluentWait(driver).withTimeOut(10,TimeUnit.Seconds).pollingEvery(5,TimeUnit.Seconds).ignoring(NoSuchElementException.class)
+
+---
+
+@Test
+public void m1()
+{
+ Haspmap data =new Hashmap();
+ data.put("id","100");
+ data.put("id","100");
+ data.put("id","100");
+ 
+Response res=
+
+  given()
+    .contentType("application/json")
+    .body(data)
+  .when()
+    .post("")
+  .then()
+    .statusCode(200) 
+    .log().body()
+    .extract().response();
+
+String js=res.asString();
+  
+Assert.assertEquals(js);
+  
+ 
+}
+
+
+
+
+
+
+
+
+
+
+
+
+ 
